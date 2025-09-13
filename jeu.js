@@ -15,6 +15,7 @@ function getName() {
   let tempName =
     prenoms[Math.floor(Math.random() * prenoms.length)].toUpperCase();
 
+  // Remove special characters
   tempName = tempName.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
   return tempName;
@@ -71,6 +72,7 @@ function checkWin(displayName) {
 }
 
 function verifierLettre(letter) {
+  // Check if the game is still going
   if (gameState === 0) return;
 
   if (!playedLetters.includes(letter)) {
