@@ -5,67 +5,87 @@ const $word = document.getElementById("mot");
 const $img = document.getElementById("img");
 
 let prenom;
-let lives = 11;
+let lives;
 let playedLetters = [];
 let wrongLetters = [];
 
-function startGame() {
-  prenom = prenoms[Math.floor(Math.random() * prenoms.length)];
+let gameState = 0;
 
-  prenom = prenom
-    .normalize("NFD") // sépare les lettres et leurs accents
-    .toUpperCase()
-    .replace(/[\u0300-\u036f]/g, ""); // enlève les accents
+function getName() {
+  let tempName =
+    prenoms[Math.floor(Math.random() * prenoms.length)].toUpperCase();
 
-  console.log(prenom);
+  tempName = tempName.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+  return tempName;
 }
 
-function restart() {
+function startGame() {
+  prenom = getName().split("");
+  console.log(prenom);
+
   playedLetters = [];
   wrongLetters = [];
-  lives = 11;
 
-  $wrongLetters.textContent = `lettres Fausses : ${wrongLetters}`;
-  $playedLetters.textContent = `Lettres Jouees ; ${playedLetters}`;
-  $lives.textContent = `Vies restantes : ${lives}`;
+  gameState = 1;
 
-  startGame();
+  updateGame();
 }
 
 function updateGame() {
-  $word.textContent = prenom
-    .split("")
-    .map((l) => (playedLetters.includes(l) ? l : "_"))
-    .join(" ");
+  lives = 11 - wrongLetters.length;
 
-  $wrongLetters.textContent = `Lettres fausses : ${wrongLetters}`;
+  $wrongLetters.textContent = `Lettres Fausses : ${wrongLetters}`;
   $playedLetters.textContent = `Lettres Jouees : ${playedLetters}`;
-  $lives.textContent = `Vies restantes : ${lives}`;
-  $img.setAttribute("src", `imgs/img${lives + 1}.png`);
+  $lives.textContent = `Vies restantes ${lives}`;
+  $img.setAttribute("src", `/imgs/img${lives + 1}.png`);
 
-  if (lives <= 0) {
-    $word.textContent = prenom;
-    setTimeout(() => alert("Perdu !"), 100);
-  } else if (checkWin()) {
-    setTimeout(() => alert("Gagné !"), 100);
+  updateName();
+}
+
+function updateName() {
+  let displayName = [];
+
+  prenom.forEach((letter) => {
+    if (playedLetters.includes(letter)) {
+      displayName.push(letter);
+    } else {
+      displayName.push("_");
+    }
+  });
+
+  checkWin(displayName);
+
+  console.log(displayName);
+  $word.textContent = displayName.join(" ");
+}
+
+function checkWin(displayName) {
+  if (!displayName.includes("_") && lives > 0) {
+    alert("Vous avez gagné !");
+    gameState = 0;
+  } else if (lives <= 0) {
+    alert("Vous avez perdu !");
+    gameState = 0;
   }
 }
 
-function checkWin() {
-  return prenom.split("").every((letter) => playedLetters.includes(letter));
-}
-
 function verifierLettre(letter) {
+  if (gameState === 0) return;
+
   if (!playedLetters.includes(letter)) {
     playedLetters.push(letter);
 
     if (!prenom.includes(letter)) {
-      lives--;
       wrongLetters.push(letter);
     }
-  } else alert("Lettre déjà jouée");
 
-  updateGame();
+    updateGame();
+  } else alert("Lettre déjà jouée");
+}
+
+function restart() {
+  startGame();
 }
 
 startGame();
