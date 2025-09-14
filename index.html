@@ -1,4 +1,4 @@
-<!DOCTYPE> 
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -13,10 +13,11 @@
         
         <div>
             <img id="img" src="imgs/img12.png" alt="jeu-du-pendu"></img>
-            <h1 id="mot"></h1>
+            <h1 id="mot">
+            </h1>
             <p id="vies">Vies restantes : 11</p>
-            <p id="lettres-fausses">Lettres Fausses : </p>
-            <p id="lettres-jouees">Lettres Jouees : </p>
+            <p>Lettres Fausses : <span id="lettres-fausses"></span> </p>
+            <p>Lettres Jouees : <samp id="lettres-jouees"></samp> </p>
         </div>
         
         <div>
@@ -49,7 +50,7 @@
         </div>
         
         <div>
-            <button id="restart" onClick="restart();"><strong>Rejouer</strong></button>
+            <button id="restart"><strong>Rejouer</strong></button>
         </div>
         
         <script src="./prenoms.js" type="text/javascript"></script>
