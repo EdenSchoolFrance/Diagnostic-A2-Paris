@@ -10,9 +10,10 @@ let incorrectLettres = "";
 let playedLettres = "";
 let remainingHealth = 11;
 
-function verifierLettre(lettre) {
+function verifyLettre(lettre) {
   if (playedLettres.includes(lettre)) return;
   playedLettres += lettre;
+  displayPlayedLettres(playedLettres);
   if (
     nameToFind // retire les accents des lettres
       .toUpperCase()
@@ -22,21 +23,15 @@ function verifierLettre(lettre) {
       .includes(lettre.toUpperCase())
   ) {
     correctLettres += lettre;
+    displayFoundLettres(nameToFind, correctLettres);
   } else {
     incorrectLettres += lettre;
     loseHealthPoint();
+    displayIncorrectLettres(incorrectLettres);
   }
 
-  displayIncorrectLettres(incorrectLettres);
-  displayPlayedLettres(playedLettres);
-  displayFoundLettres(nameToFind, correctLettres);
   setTimeout(() => {
-    if (checkWin(nameToFind, correctLettres)) {
-      alert("Victoire !!! Vous avez trouvé le prénom !!!");
-    } else if (remainingHealth === 0) {
-      alert("Défaite... Le prénom était " + nameToFind);
-      restart();
-    }
+    checkWin(nameToFind, correctLettres);
   }, 0);
 }
 
@@ -46,17 +41,17 @@ function restart() {
   incorrectLettres = "";
   playedLettres = "";
 
-  setHealth(11);
+  updateHealth(11);
   displayIncorrectLettres(incorrectLettres);
   displayPlayedLettres(playedLettres);
   displayFoundLettres(nameToFind, correctLettres);
 }
 
 function loseHealthPoint() {
-  setHealth(remainingHealth - 1);
+  updateHealth(remainingHealth - 1);
 }
 
-function setHealth(health) {
+function updateHealth(health) {
   remainingHealth = health;
   displayHealth(health);
 }
@@ -73,7 +68,6 @@ function displayIncorrectLettres(lettres) {
 function displayPlayedLettres(lettres) {
   $playedLettres.textContent = "Lettres Jouees : " + lettres;
 }
-
 function displayFoundLettres(word, lettres) {
   $word.textContent = word
     .split("")
@@ -90,20 +84,26 @@ function displayFoundLettres(word, lettres) {
     )
     .join(" ");
 }
-
 function checkWin(word, lettres) {
-  return word
-    .toLowerCase()
-    .split("")
-    .every((l) =>
-      lettres.includes(
-        l // retire les accents des lettres
-          .toUpperCase()
-          .normalize("NFD")
-          .toUpperCase()
-          .replace(/[\u0300-\u036f]/g, "")
+  if (
+    word
+      .toLowerCase()
+      .split("")
+      .every((l) =>
+        lettres.includes(
+          l // retire les accents des lettres
+            .toUpperCase()
+            .normalize("NFD")
+            .toUpperCase()
+            .replace(/[\u0300-\u036f]/g, "")
+        )
       )
-    );
+  ) {
+    alert("Victoire !!! Vous avez trouvé le prénom !!!");
+  } else if (remainingHealth === 0) {
+    alert("Défaite... Le prénom était " + nameToFind);
+    restart();
+  }
 }
 
 restart();
