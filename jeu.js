@@ -1,10 +1,10 @@
-const $wrongLetters = document.getElementById("lettres-fausses");
-const $playedLetters = document.getElementById("lettres-jouees");
-const $lives = document.getElementById("vies");
-const $word = document.getElementById("mot");
+const $wrongLetters = document.getElementById("wrong-letters");
+const $playedLetters = document.getElementById("played-letters");
+const $lives = document.getElementById("lives");
+const $word = document.getElementById("word");
 const $img = document.getElementById("img");
 
-let prenom;
+let name;
 let lives;
 let playedLetters = [];
 let wrongLetters = [];
@@ -12,8 +12,7 @@ let wrongLetters = [];
 let gameState = 0;
 
 function getName() {
-  let tempName =
-    prenoms[Math.floor(Math.random() * prenoms.length)].toUpperCase();
+  let tempName = names[Math.floor(Math.random() * names.length)].toUpperCase();
 
   // Remove special characters
   tempName = tempName.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -22,8 +21,8 @@ function getName() {
 }
 
 function startGame() {
-  prenom = getName().split("");
-  console.log(prenom);
+  name = getName().split("");
+  console.log(name);
 
   playedLetters = [];
   wrongLetters = [];
@@ -47,7 +46,7 @@ function updateGame() {
 function updateName() {
   let displayName = [];
 
-  prenom.forEach((letter) => {
+  name.forEach((letter) => {
     if (playedLetters.includes(letter)) {
       displayName.push(letter);
     } else {
@@ -58,7 +57,11 @@ function updateName() {
   checkWin(displayName);
 
   console.log(displayName);
-  $word.textContent = displayName.join(" ");
+  if (gameState === 1) {
+    $word.textContent = displayName.join(" ");
+  } else {
+    $word.textContent = name.join(" ");
+  }
 }
 
 function checkWin(displayName) {
@@ -71,14 +74,14 @@ function checkWin(displayName) {
   }
 }
 
-function verifierLettre(letter) {
+function checkLetter(letter) {
   // Check if the game is still going
   if (gameState === 0) return;
 
   if (!playedLetters.includes(letter)) {
     playedLetters.push(letter);
 
-    if (!prenom.includes(letter)) {
+    if (!name.includes(letter)) {
       wrongLetters.push(letter);
     }
 

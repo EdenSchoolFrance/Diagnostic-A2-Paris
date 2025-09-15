@@ -13,46 +13,46 @@
         
         <div>
             <img id="img" src="imgs/img12.png" alt="jeu-du-pendu"></img>
-            <h1 id="mot"></h1>
-            <p id="vies">Vies restantes : 11</p>
-            <p id="lettres-fausses">Lettres Fausses : </p>
-            <p id="lettres-jouees">Lettres Jouees : </p>
+            <h1 id="word"></h1>
+            <p id="lives">Vies restantes : 11</p>
+            <p id="wrong-letters">Lettres Fausses : </p>
+            <p id="played-letters">Lettres Jouees : </p>
         </div>
         
         <div>
-            <button class="lettre" onClick="verifierLettre('A');"><strong>A</strong></button>
-            <button class="lettre" onClick="verifierLettre('B');"><strong>B</strong></button>
-            <button class="lettre" onClick="verifierLettre('C');"><strong>C</strong></button>
-            <button class="lettre" onClick="verifierLettre('D');"><strong>D</strong></button>
-            <button class="lettre" onClick="verifierLettre('E');"><strong>E</strong></button>
-            <button class="lettre" onClick="verifierLettre('F');"><strong>F</strong></button>
-            <button class="lettre" onClick="verifierLettre('G');"><strong>G</strong></button>
-            <button class="lettre" onClick="verifierLettre('H');"><strong>H</strong></button>
-            <button class="lettre" onClick="verifierLettre('I');"><strong>I</strong></button>
-            <button class="lettre" onClick="verifierLettre('J');"><strong>J</strong></button>
-            <button class="lettre" onClick="verifierLettre('K');"><strong>K</strong></button>
-            <button class="lettre" onClick="verifierLettre('L');"><strong>L</strong></button>
-            <button class="lettre" onClick="verifierLettre('M');"><strong>M</strong></button>
-            <button class="lettre" onClick="verifierLettre('N');"><strong>N</strong></button>
-            <button class="lettre" onClick="verifierLettre('O');"><strong>O</strong></button>
-            <button class="lettre" onClick="verifierLettre('P');"><strong>P</strong></button>
-            <button class="lettre" onClick="verifierLettre('Q');"><strong>Q</strong></button>
-            <button class="lettre" onClick="verifierLettre('R');"><strong>R</strong></button>
-            <button class="lettre" onClick="verifierLettre('S');"><strong>S</strong></button>
-            <button class="lettre" onClick="verifierLettre('T');"><strong>T</strong></button>
-            <button class="lettre" onClick="verifierLettre('U');"><strong>U</strong></button>
-            <button class="lettre" onClick="verifierLettre('V');"><strong>V</strong></button>
-            <button class="lettre" onClick="verifierLettre('W');"><strong>W</strong></button>
-            <button class="lettre" onClick="verifierLettre('X');"><strong>X</strong></button>
-            <button class="lettre" onClick="verifierLettre('Y');"><strong>Y</strong></button>
-            <button class="lettre" onClick="verifierLettre('Z');"><strong>Z</strong></button>
+            <button class="lettre" onClick="checkLetter('A');"><strong>A</strong></button>
+            <button class="lettre" onClick="checkLetter('B');"><strong>B</strong></button>
+            <button class="lettre" onClick="checkLetter('C');"><strong>C</strong></button>
+            <button class="lettre" onClick="checkLetter('D');"><strong>D</strong></button>
+            <button class="lettre" onClick="checkLetter('E');"><strong>E</strong></button>
+            <button class="lettre" onClick="checkLetter('F');"><strong>F</strong></button>
+            <button class="lettre" onClick="checkLetter('G');"><strong>G</strong></button>
+            <button class="lettre" onClick="checkLetter('H');"><strong>H</strong></button>
+            <button class="lettre" onClick="checkLetter('I');"><strong>I</strong></button>
+            <button class="lettre" onClick="checkLetter('J');"><strong>J</strong></button>
+            <button class="lettre" onClick="checkLetter('K');"><strong>K</strong></button>
+            <button class="lettre" onClick="checkLetter('L');"><strong>L</strong></button>
+            <button class="lettre" onClick="checkLetter('M');"><strong>M</strong></button>
+            <button class="lettre" onClick="checkLetter('N');"><strong>N</strong></button>
+            <button class="lettre" onClick="checkLetter('O');"><strong>O</strong></button>
+            <button class="lettre" onClick="checkLetter('P');"><strong>P</strong></button>
+            <button class="lettre" onClick="checkLetter('Q');"><strong>Q</strong></button>
+            <button class="lettre" onClick="checkLetter('R');"><strong>R</strong></button>
+            <button class="lettre" onClick="checkLetter('S');"><strong>S</strong></button>
+            <button class="lettre" onClick="checkLetter('T');"><strong>T</strong></button>
+            <button class="lettre" onClick="checkLetter('U');"><strong>U</strong></button>
+            <button class="lettre" onClick="checkLetter('V');"><strong>V</strong></button>
+            <button class="lettre" onClick="checkLetter('W');"><strong>W</strong></button>
+            <button class="lettre" onClick="checkLetter('X');"><strong>X</strong></button>
+            <button class="lettre" onClick="checkLetter('Y');"><strong>Y</strong></button>
+            <button class="lettre" onClick="checkLetter('Z');"><strong>Z</strong></button>
         </div>
         
         <div>
             <button id="restart" onClick="restart();"><strong>Rejouer</strong></button>
         </div>
         
-        <script src="./prenoms.js" type="text/javascript"></script>
+        <script src="./names.js" type="text/javascript"></script>
         <script src="./images.js"></script>
         <script src="./jeu.js" type="text/javascript"></script>
     </strong></body>
