@@ -11,8 +11,8 @@ let name = "";
 
 // Choisit un prénom aléatoire et initialise le jeu
 function choiceName() {
-    const randomIndex = Math.floor(Math.random() * prenoms.length);
-    name = prenoms[randomIndex]
+    const randomIndex = Math.floor(Math.random() * names.length);
+    name = names[randomIndex]
         .normalize("NFD")
         .toUpperCase()
         .replace(/[\u0300-\u036f]/g, "");
