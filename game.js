@@ -1,18 +1,18 @@
-const $mot = document.getElementById("mot");
-const $lettresFausses = document.getElementById("lettres-fausses");
-const $lettresJouees = document.getElementById("lettres-jouees");
-const $vies = document.getElementById("vies");
+const $name = document.getElementById("name");
+const $falseLetters = document.getElementById("false-letters");
+const $playedLetters = document.getElementById("played-letters");
+const $lives = document.getElementById("lives");
 const $img = document.getElementById("img");
 
 let lives = 11;
 let playedLetters = [];
 let falseLetters = [];
-let word = "";
+let name = "";
 
 // Choisit un prénom aléatoire et initialise le jeu
 function choiceName() {
     const randomIndex = Math.floor(Math.random() * prenoms.length);
-    word = prenoms[randomIndex]
+    name = prenoms[randomIndex]
         .normalize("NFD")
         .toUpperCase()
         .replace(/[\u0300-\u036f]/g, "");
@@ -22,18 +22,18 @@ function choiceName() {
     displayUpdate();
 }
 
-// Vérifie la lettre jouée
-function verifierLettre(lettre) {
-    lettre = lettre.toUpperCase();
-    if (playedLetters.includes(lettre) || falseLetters.includes(lettre)) {
-        alert("Lettre déjà jouée !");
+// Vérifie la letter jouée
+function letterVerification(letter) {
+    letter = letter.toUpperCase();
+    if (playedLetters.includes(letter) || falseLetters.includes(letter)) {
+        alert("letter déjà jouée !");
         return;
     }
-    if (word.includes(lettre)) {
-        playedLetters.push(lettre);
+    if (name.includes(letter)) {
+        playedLetters.push(letter);
     } else {
-        playedLetters.push(lettre);
-        falseLetters.push(lettre);
+        playedLetters.push(letter);
+        falseLetters.push(letter);
         lives--;
         $img.src = `imgs/img${lives + 1}.png`;
     }
@@ -41,25 +41,25 @@ function verifierLettre(lettre) {
     endGame();
 }
 
-// Met à jour l'affichage du mot et des lettres
+// Met à jour l'affichage du mot et des letters
 function displayUpdate() {
-    $mot.textContent = word
+    $name.textContent = name
         .split("")
         .map(letter => (playedLetters.includes(letter) ? letter : "_"))
         .join(" ");
-    $vies.textContent = "Vies restantes : " + lives;
-    $lettresFausses.textContent = "Lettres fausses : " + falseLetters.join(" ");
-    $lettresJouees.textContent = "Lettres jouées : " + playedLetters.join(" ");
+    $lives.textContent = "Vies restantes : " + lives;
+    $falseLetters.textContent = "lettres fausses : " + falseLetters.join(" ");
+    $playedLetters.textContent = "lettres jouées : " + playedLetters.join(" ");
 }
 
 // Vérifie si la partie est gagnée ou perdue
 function endGame() {
     if (lives <= 0) {
-        alert("Perdu ! Le mot était : " + word);
+        alert("Perdu ! Le mot était : " + name);
         restart();
     }
-    if (!$mot.textContent.includes("_")) {
-        alert("Gagné ! Le mot était : " + word);
+    if (!$name.textContent.includes("_")) {
+        alert("Gagné ! Le mot était : " + name);
         restart();
     }
 }
@@ -71,14 +71,14 @@ function restart() {
 
 // Ajoute la gestion du clavier
 document.addEventListener("keydown", (e) => {
-    const lettre = e.key;
-    if (/^[a-zA-Z]$/.test(lettre)) {
-        verifierLettre(lettre);
+    const letter = e.key;
+    if (/^[a-zA-Z]$/.test(letter)) {
+        letterVerification(letter);
     }
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-    word = "";
+    name = "";
     playedLetters = [];
     falseLetters = [];
     lives = 11;
