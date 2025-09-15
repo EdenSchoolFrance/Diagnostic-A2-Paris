@@ -56,6 +56,7 @@ function updateName() {
 
   checkWin(displayName);
 
+  // If game ended display the full name
   console.log(displayName);
   if (gameState === 1) {
     $word.textContent = displayName.join(" ");
