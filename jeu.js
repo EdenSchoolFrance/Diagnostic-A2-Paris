@@ -14,27 +14,14 @@ let letterName;
 let selectedName;
 let currentImage = 10;
 let letterGuess = [];
+let letterPlayed = []
 let lettreWrong = [];
 let vieRestante = 11;
 let motAfficher = "";
 
-// REQUEST NAME
-async function requestRandomName() {
-  const res = await fetch("./prenoms.json");
-  const data = await res.json();
-  return data;
-}
-
-// REQUEST IMG
-async function requestImage() {
-  const res = await fetch("./images.json");
-  const data = await res.json();
-  return data;
-}
-
 //MAIN
 async function main() {
-  const name = await requestRandomName();
+  const name = prenoms
   randomSelectName(name);
   guessWord();
 }
@@ -42,7 +29,7 @@ main();
 
 // IMAGE UPDATE
 async function imageUpdate() {
-  const images = await requestImage();
+  const images = img
   $img.src = images[currentImage];
   currentImage === 0 ? updateStatusGame("loose") : currentImage--;
 }
@@ -57,19 +44,17 @@ function randomSelectName(name) {
 // VERIF LETTER
 function verifierLettre(letterChoice) {
   let verif = letterName.filter((element) => letterChoice === element);
-  if (
-    letterGuess.includes(letterChoice) ||
-    lettreWrong.includes(letterChoice)
-  ) {
+  if (letterPlayed.includes(letterChoice)) {
     alert("Déja jouer !");
     return;
   }
   if (verif.length !== 0) {
     for (let i = 0; i < verif.length; i++) {
-      letterGuess.push(letterChoice);
+      letterGuess.push(letterChoice)
       console.log(letterGuess);
       guessWord();
     }
+    letterPlayed.push(letterChoice)
   } else {
     lettreWrong.push(letterChoice);
     imageUpdate();
@@ -98,17 +83,16 @@ function guessWord() {
 //UPDATE LETTRE PLAYED
 function updateLettrePlayed() {
   $lettresjouees.textContent = "Lettres Jouees : ";
-  letterGuess.forEach(
+  letterPlayed.forEach(
     (element) =>
       ($lettresjouees.textContent = $lettresjouees.textContent + `${element} `)
   );
 
   $lettresFausses.textContent = "Lettres Fausses : ";
-  lettreWrong.forEach(
-    (element) =>
-      ($lettresFausses.textContent =
-        $lettresFausses.textContent + `${element} `)
-  );
+  lettreWrong.forEach((element) => {
+    $lettresFausses.textContent = $lettresFausses.textContent + `${element} `
+    $lettresjouees.textContent = $lettresjouees.textContent + `${element} `
+  })
 }
 
 //UPDATE LIFE
