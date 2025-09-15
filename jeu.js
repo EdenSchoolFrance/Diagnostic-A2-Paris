@@ -4,7 +4,7 @@ function verifierLettre(lettre) {
 
 let prenomChoisi = "";
 let motAffiche = [];
-let vies = imgs.length - 1;
+let vies = 11;
 let lettresJouees = [];
 let lettresFausses = [];
 
@@ -54,9 +54,9 @@ function mettreAJourAffichage() {
 
 function finDePartie() {
     if (!motAffiche.includes("_")) {
-        alert("🎉 Bravo ! Vous avez trouvé le prénom !");
+        alert("Bravo ! Vous avez trouvé le prénom !");
     } else if (vies === 0) {
-        alert(`💀 Perdu ! Le prénom était : ${prenomChoisi}`);
+        alert(`Perdu ! Le prénom était : ${prenomChoisi}`);
         motAffiche = prenomChoisi.split("");
         mettreAJourAffichage();
     }
