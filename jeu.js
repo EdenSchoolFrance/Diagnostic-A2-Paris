@@ -9,14 +9,14 @@ let lettresJouees = [];
 let lettresFausses = [];
 
 function choisirPrenom() {
-    const index = Math.floor(Math.random() * listePrenoms.length);
-    prenomChoisi = listePrenoms[index].toUpperCase();
+    const index = Math.floor(Math.random() * prenoms.length);
+    prenomChoisi = prenoms[index].toUpperCase();
     motAffiche = Array(prenomChoisi.length).fill("_");
-    vies = imgs.length - 1;
+    vies--;
     lettresJouees = [];
     lettresFausses = [];
     mettreAJourAffichage();
-    document.getElementById("img").src = imgs[vies];
+    document.getElementById("img").src = `img/img${vies + 1}.png`;
 }
 
 function verifierLettre(lettre) {
@@ -38,7 +38,7 @@ function verifierLettre(lettre) {
     } else {
         lettresFausses.push(lettre);
         vies--;
-        document.getElementById("img").src = imgs[vies];
+    document.getElementById("img").src = `img/img${vies + 1}.png`;
     }
 
     mettreAJourAffichage();
